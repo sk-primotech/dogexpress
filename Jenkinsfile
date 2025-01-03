@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from Git
-                git branch: 'main', url: 'https://github.com/Sachinku94/Dogexpress.git'
+                git branch: 'main', url: 'https://github.com/sk-primotech/dogexpress.git'
             }
         }
 
