@@ -3,15 +3,13 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "dogexpress_tests:latest" // Name for the Docker image
-        // Define volume mounts inside the stage to avoid any confusion with paths
-        // DOCKER_VOLUMES = '-v C:/ProgramData/Jenkins/.jenkins/workspace/Dogexpress:/workspace/tests'
     }
 
     stages {
         stage('Checkout') {
             steps {
                 // Checkout code from Git
-                git branch: 'main', url: 'https://github.com/sk-primotech/dogexpress.git'
+                git branch: 'main', url: 'https://github.com/Sachinku94/Dogexpress.git'
             }
         }
 
@@ -38,8 +36,11 @@ pipeline {
             steps {
                 script {
                     // Run the Docker image and execute tests
-                    docker.image(env.DOCKER_IMAGE).inside(env.DOCKER_VOLUMES) {
-                        bat 'pytest --alluredir=allure-results'
+                    docker.image(env.DOCKER_IMAGE).inside('-v ${WORKSPACE}:/workspace') {
+                        bat '''
+                        cd /workspace
+                        pytest --alluredir=allure-results
+                        '''
                     }
                 }
             }
