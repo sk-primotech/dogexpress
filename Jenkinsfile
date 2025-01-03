@@ -7,23 +7,7 @@ pipeline {
         // DOCKER_VOLUMES = '-v C:/ProgramData/Jenkins/.jenkins/workspace/Dogexpress:/workspace/tests'
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                // Checkout code from Git
-                git branch: 'main', url: 'https://github.com/Sachinku94/Dogexpress.git'
-            }
-        }
 
-        stage('Install Dependencies') {
-            steps {
-                bat '''
-                REM Install required Python dependencies
-                python -m pip install --upgrade pip
-                pip install -r requirements.txt
-                '''
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
