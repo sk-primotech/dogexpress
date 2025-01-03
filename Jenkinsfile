@@ -36,9 +36,8 @@ pipeline {
             steps {
                 script {
                     // Run the Docker image and execute tests
-                    docker.image(env.DOCKER_IMAGE).inside('-v ${WORKSPACE}:/workspace') {
+                    docker.image(env.DOCKER_IMAGE).inside {
                         bat '''
-                        cd /workspace
                         pytest --alluredir=allure-results
                         '''
                     }
